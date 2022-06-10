@@ -2,11 +2,19 @@
 
 class MessageReflex < ApplicationReflex
 
-  def create
-    # to catch parameter contents on terminal
+      # to catch parameter contents on terminal
     # binding.pry
-    @incomeData = params[:chat]
-    morph "#new_sms", render(partial: "message_part", locals: {new_message: @incomeData})
+    # @incomeData = params[:chat]
+    # @msg = Chat.new
+    # @msg.sender = @incomeData["sender"]
+    # @msg.message = @incomeData["message"]
+    # @msg.receiver = @incomeData["receiver"]
+    # @msg.save
+    # morph "#new_sms", render(partial: "message_part", locals: {new_message: @incomeData})
+  def create
+    @chat = Chat.new(chat_params)
+    @chat.save
+
     # yankee = "ROCKET UP!"
     # morph "#foo", render(partial: "foo", locals: {message: yankee})
   end
@@ -48,5 +56,10 @@ class MessageReflex < ApplicationReflex
   #   end
   #
   # Learn more at: https://docs.stimulusreflex.com/reflexes#reflex-classes
+  private  
+  # Only allow a list of trusted parameters through.
+    def chat_params
+      params.require(:chat).permit(:message, :sender, :receiver)
+    end
 
 end

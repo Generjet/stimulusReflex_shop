@@ -58,3 +58,5 @@ gem "stimulus_reflex", "~> 3.4"
 gem "pagy", "~> 5.10"
 
 gem "pry", "~> 0.14.1"
+
+gem "devise", "~> 4.8"
