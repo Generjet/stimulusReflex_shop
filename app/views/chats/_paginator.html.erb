@@ -1,0 +1,15 @@
+<nav class="d-flex justify-content-center">
+  <ul class="pagination">
+    <li class="page-item"><a href="#" id="page_prev_li" class="page-link" data-reflex="click->Pagy#paginate" data-page="<%= pagy.prev || 1 %>"><span class="far fa-angle-double-left"></span></a></li>
+    <% pagy.series.each do |item| %>
+      <% if item == :gap %>
+        <li class="page-item disabled"><a class="page-link" id="page_gap_li">...</a></li>
+      <% else %>
+        <li class="page-item <%= "active" if item.is_a?(String) %>">
+          <a href="#" id="page_<%= item %>_li" class="page-link" data-reflex="click->Pagy#paginate" data-page="<%= item %>"><%= item %></a>
+        </li>
+      <% end %>
+    <% end %>
+    <li class="page-item"><a href="#" id="page_next_li" class="page-link" data-reflex="click->Pagy#paginate" data-page="<%= pagy.next || pagy.last %>"><span class="far fa-angle-double-right"></span></a></li>
+  </ul>
+</nav>

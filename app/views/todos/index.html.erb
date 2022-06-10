@@ -1,0 +1,47 @@
+<header data-reflex="click->Example#change" >
+  <p> === selector morphs === </p>
+  <%= render partial: "foo", locals: { message: "Am I the Elixir or Rails?" } %>
+</header>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Todos</h1>
+<%= render 'todos/form', todo: @todo %>
+<p>=====================</p>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Description</th>
+      <th>Completed at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @todos.each do |todo| %>
+      <%= content_tag :tr, id: dom_id(todo), class: dom_class(todo) do %>
+        <td><%= check_box_tag nil, nil, todo.completed_at? , data: {reflex: "click->ExampleReflex#toggle", id: todo.id} %></td>
+        <td><%= todo.description %></td>
+        <td><%= todo.completed_at %></td>
+        <td><%= link_to 'Show', todo %></td>
+        <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
+        <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Todo', new_todo_path %>
+
+<h1>Counter to app/reflexes/counter_reflex.rb</h1>
+<a href="#"
+  data-reflex="click->Counter#increment"
+  data-tamir="F22"
+  data-step="1" 
+  data-count="<%= @count.to_i %>"
+>Air to air micro missiles (30mm) <%= @count.to_i %></a>
+
+<h1> Fighter jet plane is <%= @jet %> </h1>

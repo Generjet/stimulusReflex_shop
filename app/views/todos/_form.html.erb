@@ -1,0 +1,27 @@
+<%= form_with(model: todo, local: true) do |form| %>
+  <% if todo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+
+      <ul>
+        <% todo.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'form-control', data: { reflex: "change-> ExampleReflex#form" } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :completed_at %>
+    <%= form.datetime_select :completed_at %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
